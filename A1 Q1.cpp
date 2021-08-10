@@ -10,8 +10,9 @@ using namespace std;
 using half_float::half;
 using half_float::half_cast;
 
+
 // third derivative
-half df3(half x) {
+half df3(T x) {
     return half_cast<half>((half(1.2) * pow(x, half(2.0))) - (half(0.9) * x) - half(1.0));
 }
 
@@ -35,47 +36,24 @@ half cda(half h, half x, half(*f)(half)) {
 }
 
 // third derivative
-float df3(float x) {
+template<typename T>
+T df3(T x) {
     return ((1.2 * pow(x, 2.0)) - (0.9 * x) - 1.0);
 }
 
 // first derivative
-float df(float x) {
+T df(T x) {
     return ((-0.4 * pow(x, 3.0)) - (0.45 * pow(x, 2.0)) - x - 0.15);
 }
 
 // function
-float f(float x) {
+T f(T x) {
     return (-0.1 * pow(x, 4.0)) - (0.15 * pow(x, 3.0)) - (0.5 * pow(x, 2.0)) - (0.15 * (x)) + 1.2;
 }
 
 // centered difference approximation
-float cda(float h, float x, float(*f)(float)) {
-    float forward, backward;
-    forward = f(x + h);
-    backward = f(x - h);
-
-    return (forward - backward) / (2 * h);
-}
-
-// third derivative
-double df3(double x) {
-    return ((1.2 * pow(x, 2.0)) - (0.9 * x) - 1.0);
-}
-
-// first derivative
-double df(double x) {
-    return ((-0.4 * pow(x, 3.0)) - (0.45 * pow(x, 2.0)) - x - 0.15);
-}
-
-// function
-double f(double x) {
-    return (-0.1 * pow(x, 4.0)) - (0.15 * pow(x, 3.0)) - (0.5 * pow(x, 2.0)) - (0.15 * (x)) + 1.2;
-}
-
-// centered difference approximation
-double cda(double h, double x, double(*f)(double)) {
-    double forward, backward;
+T cda(T h, T x, T(*f)(T)) {
+    T forward, backward;
     forward = f(x + h);
     backward = f(x - h);
 
